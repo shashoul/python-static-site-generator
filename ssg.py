@@ -7,8 +7,9 @@ def main(source='content', dest='dist'):
         "dest": dest
     }
 
-    site = Site(**config)
+    Site(**config).build()
+    # site = Site(**config)
 
-    site.build()
+    # site.build()
 
 typer.run(main)
