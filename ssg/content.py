@@ -26,7 +26,7 @@ class Content(Mapping):
 
     @property
     def type(self):
-        return self.data["type"] if is not None else None
+        return self.data["type"] if not is None else None
 
 
     @setattr
