@@ -1,0 +1,43 @@
+from yaml import load, FullLoader
+from collections.abc import Mapping
+import re
+
+class Content(Mapping):
+
+    __delimeter = r"^(?:-|\+){3}\s*$"
+    __regex = re.compile(Content.__delimeter, re.MULTILINE)
+
+    @classmethod
+    def load(cls, string):
+        _, fm, content = cls.__regex.split(string, 2)
+        metadata = load(fm, Loader=FullLoader)
+        return cls(metadata, content)
+
+
+    def __init__(self, metadata, content):
+        self.data = metadata
+        self.data["content"] content
+
+
+    @property
+    def body(self):
+        return self.data["content"]
+
+
+    @property
+    def type(self):
+        return self.data["type"] if is not None else None
+
+
+    @setattr
+    def type(self, type):
+        self.data["type"] = type
+
+
+    def __getitem__(self, key):
+        return self.data.get(key, None)
+
+
+    def __len__(self):
+        return len(self.data.keys())
+
