@@ -4,27 +4,25 @@ import shutil
 
 class Parser:
 
-    def __init__(self):
-        self.extensions:List[str] = []
-
+    extensions: List[str] = []
 
     def valid_extension(self, extension):
-        return (extension in self.extentions)
+        return extension in self.extentions
 
 
     def parse(self, path:Path, source:Path, dest:Path):
-        raise NotImplementedError(f"This function Not Implemented")
+        raise NotImplementedError
 
 
     def read(self, path):
-        with path.open() as f:
+        with open(path, 'r') as f:
             return f.read()
 
 
     def write(self, path, dest, content, ext=".html"):
         full_path = dest / path.with_suffix(ext).name
 
-        with full_path.open('w') as f:
+        with open(full_path, 'w') as f:
             f.write(content)
 
 
@@ -36,5 +34,5 @@ class ResourceParser(Parser):
 
     extensions:List[str] = [".jpg", ".png", ".gif", ".css", ".html"]
 
-    def parse(self, path:Path, source:Path, dest:Path):
+    def parse(self, path, source, dest):
         self.copy(path, source, dest)
