@@ -39,5 +39,5 @@ class Content(Mapping):
 
 
     def __len__(self):
-        return len(self.data.keys())
+        return len(self.data)
 
