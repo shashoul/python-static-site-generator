@@ -9,7 +9,7 @@ class Parser:
 
 
     def valid_extension(self, extension):
-        return extension in self.extentions 
+        return (extension in self.extentions)
 
 
     def parse(self, path:Path, source:Path, dest:Path):
